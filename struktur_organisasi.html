@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bagan Struktur Organisasi</title>
+  <style>
+    :root {
+      --bg-color: #0f172a;
+      --card-bg: #1e293b;
+      --card-border: #334155;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --primary: #38bdf8;
+      --accent-bpi: #f59e0b;
+      --accent-co: #10b981;
+      --pink: #f472b6;
+      --blue: #60a5fa;
+      --purple: #a855f7;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      padding: 2.5rem 1rem;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    header h1 {
+      font-size: 2.25rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      background: linear-gradient(to right, #38bdf8, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    /* STATS BAR */
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .stat-card {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .stat-card.total {
+      border-color: var(--primary);
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(30, 41, 59, 0.9));
+    }
+
+    .stat-value {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .stat-card.total .stat-value {
+      color: var(--primary);
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      margin-top: 0.25rem;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 2.5rem 0 1.25rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--card-border);
+    }
+
+    .section-title.putra {
+      color: var(--blue);
+      border-bottom-color: rgba(96, 165, 250, 0.3);
+    }
+
+    .section-title.putri {
+      color: var(--pink);
+      border-bottom-color: rgba(244, 114, 182, 0.3);
+    }
+
+    .section-badge {
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+    }
+
+    /* BPI CARDS */
+    .bpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .bpi-card {
+      background: linear-gradient(145deg, #1e293b, #1e2538);
+      border: 1px solid var(--accent-bpi);
+      border-radius: 12px;
+      padding: 1.25rem;
+      position: relative;
+      box-shadow: 0 4px 20px rgba(245, 158, 11, 0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .bpi-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(245, 158, 11, 0.16);
+    }
+
+    .bpi-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      background-color: rgba(245, 158, 11, 0.15);
+      color: var(--accent-bpi);
+      margin-bottom: 0.5rem;
+    }
+
+    .bpi-role {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .bpi-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+      margin-top: 0.25rem;
+    }
+
+    /* DIVISION CARDS */
+    .division-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .div-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .div-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .div-count {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.05);
+      padding: 0.15rem 0.5rem;
+      border-radius: 6px;
+    }
+
+    .co-box {
+      background-color: rgba(16, 185, 129, 0.1);
+      border-left: 3px solid var(--accent-co);
+      border-radius: 6px;
+      padding: 0.6rem 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .co-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent-co);
+      text-transform: uppercase;
+      margin-bottom: 0.15rem;
+    }
+
+    .co-name {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .nim {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-family: monospace;
+      margin-left: 0.25rem;
+    }
+
+    .members-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .member-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      padding: 0.35rem 0.5rem;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .member-item::before {
+      content: "•";
+      color: var(--text-muted);
+      font-weight: bold;
+      font-size: 1.2rem;
+      line-height: 0;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 4rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    @media print {
+      body {
+        background: white;
+        color: black;
+      }
+      .bpi-card, .div-card, .stat-card {
+        border-color: #ccc;
+        background: white;
+        color: black;
+      }
+      .bpi-name, header h1, .stat-value {
+        color: black;
+        -webkit-text-fill-color: black;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>STRUKTUR ORGANISASI</h1>
+      <p>Bagan Kepengurusan Lengkap Anggota (Putra & Putri)</p>
+    </header>
+
+    <!-- STATS REKAPITULASI -->
+    <div class="stats-container">
+      <div class="stat-card total">
+        <div class="stat-value">47</div>
+        <div class="stat-label">Total Anggota</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" style="color: var(--blue);">24</div>
+        <div class="stat-label">Pengurus Putra</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" style="color: var(--pink);">23</div>
+        <div class="stat-label">Pengurus Putri</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" style="color: var(--accent-bpi);">8</div>
+        <div class="stat-label">BPI (Inti)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" style="color: var(--accent-co);">39</div>
+        <div class="stat-label">Pengurus Divisi</div>
+      </div>
+    </div>
+
+    <!-- BAGIAN PUTRA -->
+    <section>
+      <div class="section-title putra">
+        <span>👨 STRUKTUR PENGURUS PUTRA</span>
+        <span class="section-badge">24 Anggota</span>
+      </div>
+
+      <!-- BPI PUTRA -->
+      <div class="bpi-grid">
+        <div class="bpi-card">
+          <span class="bpi-tag">BPI PUTRA</span>
+          <div class="bpi-role">Ketua</div>
+          <div class="bpi-name">Adi Wijaya</div>
+        </div>
+        <div class="bpi-card">
+          <span class="bpi-tag">BPI PUTRA</span>
+          <div class="bpi-role">Wakil Ketua</div>
+          <div class="bpi-name">Ragel</div>
+        </div>
+        <div class="bpi-card">
+          <span class="bpi-tag">BPI PUTRA</span>
+          <div class="bpi-role">Sekretaris</div>
+          <div class="bpi-name">Nur Hasan</div>
+        </div>
+        <div class="bpi-card">
+          <span class="bpi-tag">BPI PUTRA</span>
+          <div class="bpi-role">Bendahara</div>
+          <div class="bpi-name">Yaza</div>
+        </div>
+      </div>
+
+      <!-- DIVISI PUTRA -->
+      <div class="division-grid">
+        <!-- Keilmuan -->
+        <div class="div-card">
+          <div class="div-header">
+            <span>Divisi Keilmuan</span>
+            <span class="div-count">5 Personel</span>
+          </div>
+          <div class="co-box">
+            <div class="co-label">Koordinator (CO)</div>
+            <div class="co-name">Iqromul Muslimin <span class="nim">(2521400004)</span></div>
+          </div>
+          <ul class="members-list">
+            <li class="member-item">Moh. Sahla Hamdani <span class="nim">(2521400040)</span></li>
+            <li class="member-item">Iqromul Muslimin <span class="nim">(2521400004)*</span></li>
+            <li class="member-item">Moh. Afif Amuy <span class="nim">(2421400147)*</span></li>
+            <li class="member-item">Muhammad Farhan Zaky <span class="nim">(2521400138)</span></li>
+          </ul>
+        </div>
+
+        <!-- Kominfo -->
+        <div class="div-card">
+          <div class="div-header">
+            <span>Divisi Kominfo</span>
+            <span class="div-count">5 Personel</span>
+          </div>
+          <div class="co-box">
+            <div class="co-label">Koordinator (CO)</div>
+            <div class="co-name">Syaban Ainul Kirom <span class="nim">(2421400075)</span></div>
+          </div>
+          <ul class="members-list">
+            <li class="member-item">Mohammad Taufiqur Rahman <span class="nim">(2521400008)</span></li>
+            <li class="member-item">Moch. Hadiq Masyfuk <span class="nim">(2521400011)</span></li>
+            <li class="member-item">Ryan Irwansyah <span class="nim">(2521400030)</span></li>
+            <li class="member-item">Ainur Ridho Hidayatullah <span class="nim">(2521400041)</span></li>
+          </ul>
+        </div>
+
+        <!-- Kaderisasi -->
+        <div class="div-card">
+          <div class="div-header">
+            <span>Divisi Kaderisasi</span>
+            <span class="div-count">4 Personel</span>
+          </div>
+          <div class="co-box">
+            <div class="co-label">Koordinator (CO)</div>
+            <div class="co-name">Rama Yudha Fitriansyah <span class="nim">(2521400002)</span></div>
+          </div>
+          <ul class="members-list">
+            <li class="member-item">Fadila Firmansyah <span class="nim">(2521400095)</span></li>
+            <li class="member-item">Mahfud Nadi Barokah <span class="nim">(2421400088)</span></li>
+            <li class="member-item">Jibril Prabu Surya <span class="nim">(2521400052)</span></li>
+          </ul>
+        </div>
+
+        <!-- Litbang -->
+        <div class="div-card">
+          <div class="div-header">
+            <span>Divisi Litbang</span>
+            <span class="div-count">3 Personel</span>
+          </div>
+          <div class="co-box">
+            <div class="co-label">Koordinator (CO)</div>
+            <div class="co-name">Mohammad Rizqi Maulana <span class="nim">(2521400012)</span></div>
+          </div>
+          <ul class="members-list">
+            <li class="member-item">Ramadani <span class="nim">(2521400016)</span></li>
+            <li class="member-item">Zainal Abidin <span class="nim">(2421400162)</span></li>
+          </ul>
+        </div>
+
+        <!-- Publik Relasi -->
+        <div class="div-card">
+          <div class="div-header">
+            <span>Divisi Publik Relasi</span>
+            <span class="div-count">3 Personel</span>
+          </div>
+          <div class="co-box">
+            <div class="co-label">Koordinator (CO)</div>
+            <div class="co-name">Ahmad Farel Febrian Pratama <span class="nim">(2421400062)</span></div>
+          </div>
+          <ul class="members-list">
+            <li class="member-item">Abd Rahman Febryan Syafii <span class="nim">(2521400105)</span></li>
+            <li class="member-item">Moch. Taufiqi <span class="nim">(2421400171)</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- BAGIAN PUTRI -->
+    <section>
+      <div class="section-title putri">
+        <span>🧕 STRUKTUR PENGURUS PUTRI</span>
+        <span class="section-badge">23 Anggota</span>
+      </div>
+
+      <!-- BPI PUTRI -->
+      <div class="bpi-grid">
+        <div class="bpi-card">
+          <span class="bpi-tag" style="background: rgba(244, 114, 182, 0.15); color: var(--pink); border-color: var(--pink);">BPI PUTRI</span>
+          <div class="bpi-role">Ketua</div>
+          <div class="bpi-name">Nadira</div>
+        </div>
+        <div class="bpi-card">
+          <span class="bpi-tag" style="background: rgba(244, 114, 182, 0.15); color: var(--pink); border-color: var(--pink);">BPI PUTRI</span>
+          <div class="bpi-role">Wakil Ketua</div>
+          <div class="bpi-name">Nia</div>
+        </div>
+        <div class="bpi-card">
+          <span class="bpi-tag" style="background: rgba(244, 114, 182, 0.15); color: var(--pink); border-color: var(--pink);">BPI PUTRI</span>
+          <div class="bpi-role">Sekretaris</div>
+          <div class="bpi-name">Fafi</div>
+        </div>
+        <div class="bpi-card">
+          <span class="bpi-tag" style="background: rgba(244, 114, 182, 0.15); color: var(--pink); border-color: var(--pink);">BPI PUTRI</span>
+          <div class="bpi-role">Bendahara</div>
+          <div class="bpi-name">Novel</div>
+        </div>
+      </div>
+
+      <!-- DIVISI PUTRI -->
+      <div class="division-grid">
+        <!-- Keilmuan -->
+        <div class="div-card">
+          <div class="div-header">
+            <span>Divisi Keilmuan</span>
+            <span class="div-count">5 Personel</span>
+          </div>
+          <div class="co-box">
+            <div class="co-label">Koordinator (CO)</div>
+            <div class="co-name">Rohimatul Munibah <span class="nim">(2421400017)</span></div>
+          </div>
+          <ul class="members-list">
+            <li class="member-item">Nihayah Durrotul Maknunah <span class="nim">(2521400065)</span></li>
+            <li class="member-item">Nabila Angie Novriliana <span class="nim">(2521400060)</span></li>
+            <li class="member-item">Syafinah Muthia Chanza <span class="nim">(2521400139)</span></li>
+            <li class="member-item">Nabila Aprilia Putri <span class="nim">(2521400116)</span></li>
+          </ul>
+        </div>
+
+        <!-- Kominfo -->
+        <div class="div-card">
+          <div class="div-header">
+            <span>Divisi Kominfo</span>
+            <span class="div-count">5 Personel</span>
+          </div>
+          <div class="co-box">
+            <div class="co-label">Koordinator (CO)</div>
+            <div class="co-name">Sifriah Aini <span class="nim">(2421400072)</span></div>
+          </div>
+          <ul class="members-list">
+            <li class="member-item">Amelines Inneza Putri Mahdaniyah <span class="nim">(2521400023)</span></li>
+            <li class="member-item">Kurrotun Aini <span class="nim">(2521400073)</span></li>
+            <li class="member-item">Deswita Aulia Asyiqin <span class="nim">(2521400134)</span></li>
+            <li class="member-item">Lailatus Syarifah <span class="nim">(252140011)</span></li>
+          </ul>
+        </div>
+
+        <!-- Kaderisasi -->
+        <div class="div-card">
+          <div class="div-header">
+            <span>Divisi Kaderisasi</span>
+            <span class="div-count">3 Personel</span>
+          </div>
+          <div class="co-box">
+            <div class="co-label">Koordinator (CO)</div>
+            <div class="co-name">Najwa Karimah <span class="nim">(2421400079)</span></div>
+          </div>
+          <ul class="members-list">
+            <li class="member-item">Nur Diana Holida (Lifa) <span class="nim">(2521400059)</span></li>
+            <li class="member-item">Abidatus Sholihah Mu'tia Selviani <span class="nim">(2521400028)</span></li>
+          </ul>
+        </div>
+
+        <!-- Litbang -->
+        <div class="div-card">
+          <div class="div-header">
+            <span>Divisi Litbang</span>
+            <span class="div-count">3 Personel</span>
+          </div>
+          <div class="co-box">
+            <div class="co-label">Koordinator (CO)</div>
+            <div class="co-name">Risqi Wulandari <span class="nim">(2421400069)</span></div>
+          </div>
+          <ul class="members-list">
+            <li class="member-item">Nuri Meidina Putri <span class="nim">(2521400061)</span></li>
+            <li class="member-item">Jihan Nabilla <span class="nim">(2521400094)</span></li>
+          </ul>
+        </div>
+
+        <!-- Publik Relasi -->
+        <div class="div-card">
+          <div class="div-header">
+            <span>Divisi Publik Relasi</span>
+            <span class="div-count">3 Personel</span>
+          </div>
+          <div class="co-box">
+            <div class="co-label">Koordinator (CO)</div>
+            <div class="co-name">Umi Alfina <span class="nim">(2421400106)</span></div>
+          </div>
+          <ul class="members-list">
+            <li class="member-item">Rofiqotul Jannah <span class="nim">(2521400044)</span></li>
+            <li class="member-item">Holivatul Hasanah <span class="nim">(2521400013)</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; Dokumen Struktur Organisasi | Dibuat rapi dan terorganisir</p>
+    </footer>
+  </div>
+</body>
+</html>
