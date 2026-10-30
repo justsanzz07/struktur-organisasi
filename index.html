@@ -3,52 +3,64 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Struktur Kepengurusan Organisasi</title>
+  <title>Struktur Kepengurusan Organisasi - Tema Merah Putih</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f8fafc;
+      --bg: #fafafa;
       --surface: #ffffff;
-      --surface-subtle: #f1f5f9;
-      --border: #e2e8f0;
-      --border-strong: #cbd5e1;
-      --text: #0f172a;
-      --text-muted: #64748b;
-      --text-soft: #94a3b8;
+      --surface-subtle: #f8fafc;
+      --border: #e4e4e7;
+      --border-strong: #d4d4d8;
+      --text: #18181b;
+      --text-muted: #71717a;
+      --text-soft: #a1a1aa;
       
-      /* Restrained institutional palette */
-      --primary: #1e3a8a;
-      --primary-subtle: #eff6ff;
-      --bpi-badge-bg: #fef3c7;
-      --bpi-badge-text: #92400e;
-      --bpi-border: #fde68a;
-      --co-badge-bg: #ecfdf5;
-      --co-badge-text: #065f46;
+      /* Merah Putih Theme Palette */
+      --primary: #c91a25; /* Merah Indonesia */
+      --primary-hover: #a1141d;
+      --primary-subtle: #fef2f2;
+      --primary-border: #fecaca;
       
-      --radius-sm: 4px;
-      --radius-md: 8px;
-      --radius-lg: 12px;
+      --bpi-badge-bg: #fee2e2;
+      --bpi-badge-text: #991b1b;
+      --bpi-border: #f87171;
+      --bpi-card-bg: #ffffff;
+      
+      --co-badge-bg: #fff1f2;
+      --co-badge-text: #be123c;
+      --co-border: #fecdd3;
+      
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
     }
 
     [data-theme="dark"] {
-      --bg: #0b1120;
-      --surface: #131d33;
-      --surface-subtle: #1e293b;
-      --border: #1e293b;
-      --border-strong: #334155;
-      --text: #f8fafc;
-      --text-muted: #94a3b8;
-      --text-soft: #64748b;
+      --bg: #09090b;
+      --surface: #141418;
+      --surface-subtle: #1f1f25;
+      --border: #27272a;
+      --border-strong: #3f3f46;
+      --text: #fafafa;
+      --text-muted: #a1a1aa;
+      --text-soft: #71717a;
       
-      --primary: #60a5fa;
-      --primary-subtle: #172554;
-      --bpi-badge-bg: #451a03;
-      --bpi-badge-text: #fcd34d;
-      --bpi-border: #78350f;
-      --co-badge-bg: #064e3b;
-      --co-badge-text: #6ee7b7;
+      --primary: #ef4444;
+      --primary-hover: #f87171;
+      --primary-subtle: #2d1014;
+      --primary-border: #4c1117;
+      
+      --bpi-badge-bg: #450a0a;
+      --bpi-badge-text: #fca5a5;
+      --bpi-border: #991b1b;
+      --bpi-card-bg: #18181f;
+      
+      --co-badge-bg: #311116;
+      --co-badge-text: #fda4af;
+      --co-border: #4c1117;
     }
 
     * {
@@ -57,12 +69,25 @@
       padding: 0;
     }
 
+    /* Top Ribbon Accent Merah Putih */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(to right, #c91a25 50%, #ffffff 50%);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+
     body {
       background-color: var(--bg);
       color: var(--text);
       font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
       line-height: 1.5;
-      padding: 2.5rem 1rem 5rem;
+      padding: 2.75rem 1rem 5rem;
       transition: background-color 0.2s ease, color 0.2s ease;
       -webkit-font-smoothing: antialiased;
     }
@@ -82,12 +107,24 @@
       border-bottom: 1px solid var(--border);
     }
 
-    .org-meta {
+    .flag-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
       font-size: 0.8125rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
+      font-weight: 700;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      color: var(--text-muted);
+      color: var(--primary);
+    }
+
+    .flag-pill {
+      display: inline-block;
+      width: 18px;
+      height: 12px;
+      border-radius: 2px;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      background: linear-gradient(to bottom, #c91a25 50%, #ffffff 50%);
     }
 
     .top-actions {
@@ -103,7 +140,7 @@
       font-size: 0.8125rem;
       font-weight: 600;
       padding: 0.45rem 0.875rem;
-      border-radius: var(--radius-md);
+      border-radius: var(--radius-sm);
       border: 1px solid var(--border-strong);
       background-color: var(--surface);
       color: var(--text);
@@ -113,6 +150,17 @@
 
     .btn:hover {
       background-color: var(--surface-subtle);
+      border-color: var(--primary);
+    }
+
+    .btn.primary {
+      background-color: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .btn.primary:hover {
+      background-color: var(--primary-hover);
     }
 
     /* HEADER */
@@ -121,11 +169,15 @@
     }
 
     h1 {
-      font-size: 2rem;
-      font-weight: 700;
-      letter-spacing: -0.025em;
+      font-size: 2.125rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
       color: var(--text);
       margin-bottom: 0.35rem;
+    }
+
+    h1 span.highlight {
+      color: var(--primary);
     }
 
     .subtitle {
@@ -146,24 +198,29 @@
       background-color: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
-      padding: 1rem;
+      padding: 1rem 1.125rem;
+      transition: border-color 0.15s ease;
     }
 
     .summary-card.featured {
-      border-color: var(--border-strong);
-      background-color: var(--surface-subtle);
+      border-color: var(--primary-border);
+      background-color: var(--primary-subtle);
+    }
+
+    .summary-card.featured .summary-num {
+      color: var(--primary);
     }
 
     .summary-num {
-      font-size: 1.75rem;
-      font-weight: 700;
+      font-size: 1.875rem;
+      font-weight: 800;
       line-height: 1.2;
       color: var(--text);
     }
 
     .summary-label {
       font-size: 0.75rem;
-      font-weight: 600;
+      font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.04em;
       color: var(--text-muted);
@@ -193,7 +250,7 @@
     .tab-btn {
       background: none;
       border: none;
-      padding: 0.4rem 0.75rem;
+      padding: 0.45rem 0.85rem;
       font-family: inherit;
       font-size: 0.8125rem;
       font-weight: 600;
@@ -209,9 +266,8 @@
     }
 
     .tab-btn.active {
-      color: var(--text);
-      background-color: var(--surface-subtle);
-      box-shadow: inset 0 0 0 1px var(--border-strong);
+      color: #ffffff;
+      background-color: var(--primary);
     }
 
     .search-box {
@@ -234,7 +290,7 @@
     }
 
     .search-input:focus {
-      border-color: var(--text-muted);
+      border-color: var(--primary);
     }
 
     /* SECTION HEADERS */
@@ -245,32 +301,36 @@
     .section-header {
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
+      align-items: center;
       padding-bottom: 0.75rem;
       margin-bottom: 1.25rem;
-      border-bottom: 1px solid var(--border-strong);
+      border-bottom: 2px solid var(--primary);
     }
 
     .section-header h2 {
       font-size: 1.25rem;
-      font-weight: 700;
+      font-weight: 800;
       letter-spacing: -0.01em;
       color: var(--text);
     }
 
     .section-count {
       font-size: 0.8125rem;
-      color: var(--text-muted);
-      font-weight: 500;
+      color: var(--primary);
+      font-weight: 700;
+      background-color: var(--primary-subtle);
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--primary-border);
     }
 
     /* BPI CARDS */
     .subhead {
       font-size: 0.75rem;
-      font-weight: 700;
+      font-weight: 800;
       letter-spacing: 0.05em;
       text-transform: uppercase;
-      color: var(--text-muted);
+      color: var(--primary);
       margin-bottom: 0.875rem;
     }
 
@@ -282,16 +342,17 @@
     }
 
     .bpi-card {
-      background-color: var(--surface);
+      background-color: var(--bpi-card-bg);
       border: 1px solid var(--bpi-border);
       border-radius: var(--radius-md);
       padding: 1.125rem;
+      position: relative;
     }
 
     .bpi-badge {
       display: inline-block;
       font-size: 0.6875rem;
-      font-weight: 700;
+      font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.05em;
       padding: 0.15rem 0.5rem;
@@ -304,7 +365,7 @@
     .bpi-role {
       font-size: 0.8125rem;
       color: var(--text-muted);
-      font-weight: 500;
+      font-weight: 600;
     }
 
     .bpi-name {
@@ -356,8 +417,8 @@
 
     /* CO BOX */
     .co-row {
-      background-color: var(--surface-subtle);
-      border: 1px solid var(--border);
+      background-color: var(--co-badge-bg);
+      border: 1px solid var(--co-border);
       border-radius: var(--radius-sm);
       padding: 0.625rem 0.75rem;
       margin-bottom: 0.875rem;
@@ -365,7 +426,7 @@
 
     .co-tag {
       font-size: 0.6875rem;
-      font-weight: 700;
+      font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.04em;
       color: var(--co-badge-text);
@@ -373,7 +434,7 @@
     }
 
     .co-name {
-      font-weight: 600;
+      font-weight: 700;
       font-size: 0.9375rem;
       color: var(--text);
     }
@@ -382,7 +443,7 @@
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.75rem;
       color: var(--text-muted);
-      font-weight: 400;
+      font-weight: 500;
       margin-left: 0.25rem;
     }
 
@@ -393,7 +454,7 @@
 
     .members-heading {
       font-size: 0.6875rem;
-      font-weight: 600;
+      font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.04em;
       color: var(--text-soft);
@@ -428,12 +489,13 @@
     /* FOOTNOTES & FOOTER */
     .notes-box {
       margin-top: 2rem;
-      padding: 1rem;
+      padding: 1.125rem;
       border-radius: var(--radius-md);
       background-color: var(--surface);
       border: 1px solid var(--border);
       font-size: 0.8125rem;
       color: var(--text-muted);
+      border-left: 4px solid var(--primary);
     }
 
     footer {
@@ -460,6 +522,9 @@
         color: #000000 !important;
         padding: 0;
       }
+      body::before {
+        display: none !important;
+      }
       .top-bar, .controls-bar, .theme-toggle, .btn {
         display: none !important;
       }
@@ -479,12 +544,15 @@
   <div class="container">
     <!-- TOP BAR -->
     <div class="top-bar">
-      <span class="org-meta">Dokumen Resmi Kepengurusan</span>
+      <div class="flag-badge">
+        <span class="flag-pill"></span>
+        <span>Struktur Organisasi &bull; Edisi Merah Putih</span>
+      </div>
       <div class="top-actions">
         <button class="btn" id="themeBtn" aria-label="Ganti Tema">
           <span id="themeLabel">Mode Gelap</span>
         </button>
-        <button class="btn" onclick="window.print()">
+        <button class="btn primary" onclick="window.print()">
           Cetak / PDF
         </button>
       </div>
@@ -492,8 +560,8 @@
 
     <!-- MAIN HEADER -->
     <header>
-      <h1>Struktur Kepengurusan Organisasi</h1>
-      <p class="subtitle">Daftar Badan Pengurus Inti (BPI), Koordinator, dan Anggota Divisi Periode Berjalan.</p>
+      <h1>Struktur Kepengurusan <span class="highlight">Organisasi</span></h1>
+      <p class="subtitle">Bagan Resmi Badan Pengurus Inti (BPI), Koordinator, dan Anggota Divisi Periode Berjalan.</p>
     </header>
 
     <!-- REKAPITULASI DATA -->
@@ -540,13 +608,13 @@
     </div>
 
     <div id="emptySearch" class="empty-search">
-      Tidak ada pengurus yang sesuai dengan pencarian.
+      Tidak ada pengurus yang sesuai dengan kata kunci pencarian.
     </div>
 
     <!-- SECTION: PUTRA -->
     <section class="section-block section-group" data-group="putra">
       <div class="section-header">
-        <h2>Kepengurusan Putra</h2>
+        <h2>Kepengurusan Bagian Putra</h2>
         <span class="section-count">24 Personel</span>
       </div>
 
@@ -732,7 +800,7 @@
     <!-- SECTION: PUTRI -->
     <section class="section-block section-group" data-group="putri">
       <div class="section-header">
-        <h2>Kepengurusan Putri</h2>
+        <h2>Kepengurusan Bagian Putri</h2>
         <span class="section-count">23 Personel</span>
       </div>
 
@@ -884,7 +952,7 @@
           </div>
 
           <!-- Publik Relasi -->
-          <div class="division-card member-record" data-keywords="publik relasi umi alfina rofiqotul jannah holivatul hasanah 2421400106 2521400044 2521400013">
+          <div class="division-card member-record" data-keywords="publik relasi humas umi alfina rofiqotul jannah holivatul hasanah 2421400106 2521400044 252140013">
             <div class="div-title-row">
               <span class="div-name">Divisi Publik Relasi</span>
               <span class="div-badge">3 Personel</span>
@@ -913,12 +981,12 @@
 
     <!-- FOOTNOTES -->
     <div class="notes-box">
-      <strong>Catatan Khusus:</strong> Tanda bintang (*) pada nama anggota (Divisi Keilmuan Putra: Iqromul Muslimin dan Moh. Afif Amuy) merujuk pada catatan penugasan ganda / verifikasi data sesuai dokumen asli organisasi.
+      <strong>Catatan Khusus:</strong> Tanda bintang (*) pada nama anggota (Divisi Keilmuan Putra: Iqromul Muslimin dan Moh. Afif Amuy) merujuk pada catatan penugasan ganda / verifikasi data internal sesuai naskah dokumen asli.
     </div>
 
     <!-- FOOTER -->
     <footer>
-      Dokumen Struktur Kepengurusan Organisasi &bull; Terverifikasi
+      Dokumen Resmi Struktur Kepengurusan Organisasi &bull; Edisi Merah Putih
     </footer>
   </div>
 
