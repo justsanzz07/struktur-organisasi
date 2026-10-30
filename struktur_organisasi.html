@@ -3,23 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Struktur Kepengurusan Organisasi - Tema Merah Putih</title>
+  <title>Struktur Kepengurusan Organisasi - Edisi Merah Putih</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #fafafa;
+      --bg: #f8fafc;
       --surface: #ffffff;
       --surface-subtle: #f8fafc;
-      --border: #e4e4e7;
-      --border-strong: #d4d4d8;
-      --text: #18181b;
-      --text-muted: #71717a;
-      --text-soft: #a1a1aa;
+      --border: #e2e8f0;
+      --border-strong: #cbd5e1;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --text-soft: #94a3b8;
       
-      /* Merah Putih Theme Palette */
-      --primary: #c91a25; /* Merah Indonesia */
+      /* Merah Putih Palette */
+      --primary: #c91a25; /* Merah Kebangsaan */
       --primary-hover: #a1141d;
       --primary-subtle: #fef2f2;
       --primary-border: #fecaca;
@@ -41,7 +41,7 @@
     [data-theme="dark"] {
       --bg: #09090b;
       --surface: #141418;
-      --surface-subtle: #1f1f25;
+      --surface-subtle: #1c1c22;
       --border: #27272a;
       --border-strong: #3f3f46;
       --text: #fafafa;
@@ -69,7 +69,7 @@
       padding: 0;
     }
 
-    /* Top Ribbon Accent Merah Putih */
+    /* Pita Aksen Merah Putih di Atas */
     body::before {
       content: "";
       position: fixed;
@@ -90,11 +90,26 @@
       padding: 2.75rem 1rem 5rem;
       transition: background-color 0.2s ease, color 0.2s ease;
       -webkit-font-smoothing: antialiased;
+      
+      /* Textured Background: Motif Geometris Nusantara (Kawung) + Semburat Hangat */
+      background-image: 
+        radial-gradient(circle at 15% 5%, rgba(201, 26, 37, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 85% 95%, rgba(201, 26, 37, 0.04) 0%, transparent 40%),
+        url("data:image/svg+xml,%3Csvg width='56' height='56' viewBox='0 0 56 56' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23c91a25' fill-opacity='0.035' fill-rule='evenodd'%3E%3Cpath d='M28 28c0-10.3-8.35-18.66-18.66-18.66S-9.33 17.7-9.33 28s8.35 18.66 18.67 18.66S28 38.3 28 28zm0 0c0 10.3 8.35 18.66 18.67 18.66S65.33 38.3 65.33 28s-8.35-18.66-18.66-18.66S28 17.7 28 28zm0 0c10.32 0 18.67-8.35 18.67-18.66S38.32-9.33 28-9.33 9.33-1 9.33 9.34 17.68 28 28 28zm0 0c-10.32 0-18.67 8.35-18.67 18.66s8.35 18.67 18.67 18.67 18.67-8.36 18.67-18.67S38.32 28 28 28z'/%3E%3C/g%3E%3C/svg%3E");
+      background-attachment: fixed;
+    }
+
+    [data-theme="dark"] body {
+      background-image: 
+        radial-gradient(circle at 15% 5%, rgba(239, 68, 68, 0.07) 0%, transparent 45%),
+        radial-gradient(circle at 85% 95%, rgba(239, 68, 68, 0.05) 0%, transparent 45%),
+        url("data:image/svg+xml,%3Csvg width='56' height='56' viewBox='0 0 56 56' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.02' fill-rule='evenodd'%3E%3Cpath d='M28 28c0-10.3-8.35-18.66-18.66-18.66S-9.33 17.7-9.33 28s8.35 18.66 18.67 18.66S28 38.3 28 28zm0 0c0 10.3 8.35 18.66 18.67 18.66S65.33 38.3 65.33 28s-8.35-18.66-18.66-18.66S28 17.7 28 28zm0 0c10.32 0 18.67-8.35 18.67-18.66S38.32-9.33 28-9.33 9.33-1 9.33 9.34 17.68 28 28 28zm0 0c-10.32 0-18.67 8.35-18.67 18.66s8.35 18.67 18.67 18.67 18.67-8.36 18.67-18.67S38.32 28 28 28z'/%3E%3C/g%3E%3C/svg%3E");
     }
 
     .container {
       max-width: 1120px;
       margin: 0 auto;
+      position: relative;
     }
 
     /* TOP BAR / UTILITIES */
@@ -146,6 +161,7 @@
       color: var(--text);
       cursor: pointer;
       transition: all 0.15s ease;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
     }
 
     .btn:hover {
@@ -166,6 +182,22 @@
     /* HEADER */
     header {
       margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    /* Subtle Decorative Badge behind Header */
+    .header-badge-bg {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--primary);
+      background: var(--primary-subtle);
+      border: 1px solid var(--primary-border);
+      padding: 0.2rem 0.65rem;
+      border-radius: var(--radius-sm);
+      margin-bottom: 0.65rem;
     }
 
     h1 {
@@ -199,7 +231,12 @@
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
       padding: 1rem 1.125rem;
-      transition: border-color 0.15s ease;
+      transition: transform 0.15s ease, border-color 0.15s ease;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    }
+
+    .summary-card:hover {
+      transform: translateY(-1px);
     }
 
     .summary-card.featured {
@@ -239,6 +276,7 @@
       border: 1px solid var(--border);
       padding: 0.75rem 1rem;
       border-radius: var(--radius-md);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
     }
 
     .filter-tabs {
@@ -347,6 +385,13 @@
       border-radius: var(--radius-md);
       padding: 1.125rem;
       position: relative;
+      box-shadow: 0 2px 4px rgba(201, 26, 37, 0.04);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .bpi-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(201, 26, 37, 0.08);
     }
 
     .bpi-badge {
@@ -389,6 +434,12 @@
       padding: 1.25rem;
       display: flex;
       flex-direction: column;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+      transition: transform 0.15s ease;
+    }
+
+    .division-card:hover {
+      transform: translateY(-1px);
     }
 
     .div-title-row {
@@ -496,6 +547,7 @@
       font-size: 0.8125rem;
       color: var(--text-muted);
       border-left: 4px solid var(--primary);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
     }
 
     footer {
@@ -519,6 +571,7 @@
     @media print {
       body {
         background: #ffffff !important;
+        background-image: none !important;
         color: #000000 !important;
         padding: 0;
       }
@@ -560,8 +613,9 @@
 
     <!-- MAIN HEADER -->
     <header>
+      <div class="header-badge-bg">Periode Kepengurusan Aktif</div>
       <h1>Struktur Kepengurusan <span class="highlight">Organisasi</span></h1>
-      <p class="subtitle">Bagan Resmi Badan Pengurus Inti (BPI), Koordinator, dan Anggota Divisi Periode Berjalan.</p>
+      <p class="subtitle">Bagan Resmi Badan Pengurus Inti (BPI), Koordinator, dan Anggota Divisi.</p>
     </header>
 
     <!-- REKAPITULASI DATA -->
