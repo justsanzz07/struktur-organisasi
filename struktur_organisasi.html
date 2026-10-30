@@ -3,64 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Struktur Kepengurusan Organisasi - Edisi Merah Putih</title>
+  <title>Portal Struktur Organisasi &bull; Edisi Merah Putih</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f8fafc;
-      --surface: #ffffff;
-      --surface-subtle: #f8fafc;
-      --border: #e2e8f0;
-      --border-strong: #cbd5e1;
-      --text: #0f172a;
-      --text-muted: #64748b;
-      --text-soft: #94a3b8;
+      --bg: #090a0f;
+      --bg-card: rgba(18, 20, 29, 0.75);
+      --bg-card-hover: rgba(26, 29, 42, 0.9);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-red: rgba(225, 29, 72, 0.35);
       
-      /* Merah Putih Palette */
-      --primary: #c91a25; /* Merah Kebangsaan */
-      --primary-hover: #a1141d;
-      --primary-subtle: #fef2f2;
-      --primary-border: #fecaca;
+      --red-primary: #e11d48;
+      --red-glow: rgba(225, 29, 72, 0.18);
+      --red-light: #fda4af;
+      --white-pure: #ffffff;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
       
-      --bpi-badge-bg: #fee2e2;
-      --bpi-badge-text: #991b1b;
-      --bpi-border: #f87171;
-      --bpi-card-bg: #ffffff;
-      
-      --co-badge-bg: #fff1f2;
-      --co-badge-text: #be123c;
-      --co-border: #fecdd3;
-      
-      --radius-sm: 6px;
-      --radius-md: 10px;
-      --radius-lg: 14px;
-    }
-
-    [data-theme="dark"] {
-      --bg: #09090b;
-      --surface: #141418;
-      --surface-subtle: #1c1c22;
-      --border: #27272a;
-      --border-strong: #3f3f46;
-      --text: #fafafa;
-      --text-muted: #a1a1aa;
-      --text-soft: #71717a;
-      
-      --primary: #ef4444;
-      --primary-hover: #f87171;
-      --primary-subtle: #2d1014;
-      --primary-border: #4c1117;
-      
-      --bpi-badge-bg: #450a0a;
-      --bpi-badge-text: #fca5a5;
-      --bpi-border: #991b1b;
-      --bpi-card-bg: #18181f;
-      
-      --co-badge-bg: #311116;
-      --co-badge-text: #fda4af;
-      --co-border: #4c1117;
+      --font-main: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
     }
 
     * {
@@ -69,77 +32,109 @@
       padding: 0;
     }
 
-    /* Pita Aksen Merah Putih di Atas */
-    body::before {
-      content: "";
+    body {
+      background-color: var(--bg);
+      color: #f1f5f9;
+      font-family: var(--font-main);
+      min-height: 100vh;
+      line-height: 1.5;
+      padding: 2.5rem 1.25rem 6rem;
+      position: relative;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* AMBIENT GLOW & MESH BACKGROUND */
+    .bg-ambient {
       position: fixed;
       top: 0;
       left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(to right, #c91a25 50%, #ffffff 50%);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-      z-index: 1000;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      background: 
+        radial-gradient(circle at 10% 15%, rgba(225, 29, 72, 0.14) 0%, transparent 45%),
+        radial-gradient(circle at 90% 85%, rgba(225, 29, 72, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.6) 0%, transparent 70%);
     }
 
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-      line-height: 1.5;
-      padding: 2.75rem 1rem 5rem;
-      transition: background-color 0.2s ease, color 0.2s ease;
-      -webkit-font-smoothing: antialiased;
-      
-      /* Textured Background: Motif Geometris Nusantara (Kawung) + Semburat Hangat */
+    .bg-grid {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
       background-image: 
-        radial-gradient(circle at 15% 5%, rgba(201, 26, 37, 0.05) 0%, transparent 40%),
-        radial-gradient(circle at 85% 95%, rgba(201, 26, 37, 0.04) 0%, transparent 40%),
-        url("data:image/svg+xml,%3Csvg width='56' height='56' viewBox='0 0 56 56' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23c91a25' fill-opacity='0.035' fill-rule='evenodd'%3E%3Cpath d='M28 28c0-10.3-8.35-18.66-18.66-18.66S-9.33 17.7-9.33 28s8.35 18.66 18.67 18.66S28 38.3 28 28zm0 0c0 10.3 8.35 18.66 18.67 18.66S65.33 38.3 65.33 28s-8.35-18.66-18.66-18.66S28 17.7 28 28zm0 0c10.32 0 18.67-8.35 18.67-18.66S38.32-9.33 28-9.33 9.33-1 9.33 9.34 17.68 28 28 28zm0 0c-10.32 0-18.67 8.35-18.67 18.66s8.35 18.67 18.67 18.67 18.67-8.36 18.67-18.67S38.32 28 28 28z'/%3E%3C/g%3E%3C/svg%3E");
-      background-attachment: fixed;
-    }
-
-    [data-theme="dark"] body {
-      background-image: 
-        radial-gradient(circle at 15% 5%, rgba(239, 68, 68, 0.07) 0%, transparent 45%),
-        radial-gradient(circle at 85% 95%, rgba(239, 68, 68, 0.05) 0%, transparent 45%),
-        url("data:image/svg+xml,%3Csvg width='56' height='56' viewBox='0 0 56 56' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.02' fill-rule='evenodd'%3E%3Cpath d='M28 28c0-10.3-8.35-18.66-18.66-18.66S-9.33 17.7-9.33 28s8.35 18.66 18.67 18.66S28 38.3 28 28zm0 0c0 10.3 8.35 18.66 18.67 18.66S65.33 38.3 65.33 28s-8.35-18.66-18.66-18.66S28 17.7 28 28zm0 0c10.32 0 18.67-8.35 18.67-18.66S38.32-9.33 28-9.33 9.33-1 9.33 9.34 17.68 28 28 28zm0 0c-10.32 0-18.67 8.35-18.67 18.66s8.35 18.67 18.67 18.67 18.67-8.36 18.67-18.67S38.32 28 28 28z'/%3E%3C/g%3E%3C/svg%3E");
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
     }
 
     .container {
-      max-width: 1120px;
+      max-width: 1180px;
       margin: 0 auto;
       position: relative;
+      z-index: 1;
     }
 
-    /* TOP BAR / UTILITIES */
+    /* TOP BAR */
     .top-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 2rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--border);
+      padding: 0.85rem 1.25rem;
+      border-radius: 9999px;
+      background: rgba(18, 20, 29, 0.6);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      margin-bottom: 2.5rem;
     }
 
-    .flag-badge {
+    .brand-pill {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.65rem;
       font-size: 0.8125rem;
       font-weight: 700;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: var(--primary);
+      color: #ffffff;
     }
 
-    .flag-pill {
+    .flag-wave {
       display: inline-block;
-      width: 18px;
-      height: 12px;
-      border-radius: 2px;
-      border: 1px solid rgba(0, 0, 0, 0.15);
-      background: linear-gradient(to bottom, #c91a25 50%, #ffffff 50%);
+      width: 20px;
+      height: 14px;
+      border-radius: 3px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 0 10px rgba(225, 29, 72, 0.3);
+      background: linear-gradient(to bottom, #e11d48 50%, #ffffff 50%);
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.04);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      border: 1px solid var(--border);
+    }
+
+    .pulse-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 8px #10b981;
     }
 
     .top-actions {
@@ -147,930 +142,1211 @@
       gap: 0.5rem;
     }
 
-    .btn {
+    .btn-action {
       display: inline-flex;
       align-items: center;
-      gap: 0.375rem;
+      gap: 0.4rem;
       font-family: inherit;
       font-size: 0.8125rem;
       font-weight: 600;
-      padding: 0.45rem 0.875rem;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border-strong);
-      background-color: var(--surface);
-      color: var(--text);
-      cursor: pointer;
-      transition: all 0.15s ease;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
-    }
-
-    .btn:hover {
-      background-color: var(--surface-subtle);
-      border-color: var(--primary);
-    }
-
-    .btn.primary {
-      background-color: var(--primary);
-      color: #ffffff;
-      border-color: var(--primary);
-    }
-
-    .btn.primary:hover {
-      background-color: var(--primary-hover);
-    }
-
-    /* HEADER */
-    header {
-      margin-bottom: 2.5rem;
-      position: relative;
-    }
-
-    /* Subtle Decorative Badge behind Header */
-    .header-badge-bg {
-      display: inline-block;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--primary);
-      background: var(--primary-subtle);
-      border: 1px solid var(--primary-border);
-      padding: 0.2rem 0.65rem;
-      border-radius: var(--radius-sm);
-      margin-bottom: 0.65rem;
-    }
-
-    h1 {
-      font-size: 2.125rem;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      color: var(--text);
-      margin-bottom: 0.35rem;
-    }
-
-    h1 span.highlight {
-      color: var(--primary);
-    }
-
-    .subtitle {
-      font-size: 1rem;
-      color: var(--text-muted);
-      max-width: 640px;
-    }
-
-    /* REKAPITULASI STATS BAR */
-    .summary-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 0.75rem;
-      margin-bottom: 2.25rem;
-    }
-
-    .summary-card {
-      background-color: var(--surface);
+      padding: 0.45rem 1rem;
+      border-radius: 9999px;
       border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 1rem 1.125rem;
-      transition: transform 0.15s ease, border-color 0.15s ease;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+      background: rgba(255, 255, 255, 0.03);
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.2s ease;
     }
 
-    .summary-card:hover {
+    .btn-action:hover {
+      background: rgba(225, 29, 72, 0.15);
+      border-color: var(--red-primary);
       transform: translateY(-1px);
     }
 
-    .summary-card.featured {
-      border-color: var(--primary-border);
-      background-color: var(--primary-subtle);
+    .btn-action.red {
+      background: linear-gradient(135deg, #e11d48, #be123c);
+      border-color: rgba(225, 29, 72, 0.5);
+      box-shadow: 0 4px 14px rgba(225, 29, 72, 0.35);
     }
 
-    .summary-card.featured .summary-num {
-      color: var(--primary);
+    .btn-action.red:hover {
+      box-shadow: 0 6px 20px rgba(225, 29, 72, 0.5);
     }
 
-    .summary-num {
-      font-size: 1.875rem;
-      font-weight: 800;
-      line-height: 1.2;
-      color: var(--text);
+    /* HERO */
+    .hero {
+      text-align: center;
+      margin-bottom: 3rem;
     }
 
-    .summary-label {
+    .hero-tag {
+      display: inline-block;
       font-size: 0.75rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: var(--text-muted);
-      margin-top: 0.25rem;
+      letter-spacing: 0.12em;
+      color: var(--red-light);
+      background: rgba(225, 29, 72, 0.12);
+      border: 1px solid var(--border-red);
+      padding: 0.3rem 0.85rem;
+      border-radius: 9999px;
+      margin-bottom: 1rem;
     }
 
-    /* CONTROLS (SEARCH & FILTER) */
-    .controls-bar {
+    .hero h1 {
+      font-size: 2.75rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: #ffffff;
+      line-height: 1.15;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero h1 span.crimson {
+      color: var(--red-primary);
+      text-shadow: 0 0 30px rgba(225, 29, 72, 0.4);
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    /* STATS STRIP */
+    .stats-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.85rem;
+      margin-bottom: 2.75rem;
+    }
+
+    .stat-box {
+      background: var(--bg-card);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.25rem 1.5rem;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-box:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.15);
+      background: var(--bg-card-hover);
+    }
+
+    .stat-box.highlight {
+      border-color: var(--border-red);
+      background: linear-gradient(145deg, rgba(225, 29, 72, 0.12), rgba(18, 20, 29, 0.75));
+    }
+
+    .stat-box.highlight::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--red-primary), transparent);
+    }
+
+    .stat-val {
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    .stat-box.highlight .stat-val {
+      color: var(--red-light);
+    }
+
+    .stat-desc {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 0.5rem;
+    }
+
+    /* CONTROLS (TABS & SEARCH) */
+    .control-panel {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
+      gap: 1rem;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 2.5rem;
-      background-color: var(--surface);
+      margin-bottom: 2.75rem;
+      background: rgba(18, 20, 29, 0.6);
+      backdrop-filter: blur(12px);
       border: 1px solid var(--border);
-      padding: 0.75rem 1rem;
-      border-radius: var(--radius-md);
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+      padding: 0.65rem 0.85rem;
+      border-radius: 16px;
     }
 
-    .filter-tabs {
+    .nav-tabs {
       display: flex;
-      gap: 0.375rem;
+      gap: 0.35rem;
       flex-wrap: wrap;
     }
 
-    .tab-btn {
+    .tab-item {
       background: none;
       border: none;
-      padding: 0.45rem 0.85rem;
+      padding: 0.5rem 1.1rem;
       font-family: inherit;
-      font-size: 0.8125rem;
+      font-size: 0.85rem;
       font-weight: 600;
       color: var(--text-muted);
-      border-radius: var(--radius-sm);
+      border-radius: 9999px;
       cursor: pointer;
-      transition: all 0.15s ease;
+      transition: all 0.2s ease;
     }
 
-    .tab-btn:hover {
-      color: var(--text);
-      background-color: var(--surface-subtle);
+    .tab-item:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.05);
     }
 
-    .tab-btn.active {
-      color: #ffffff;
-      background-color: var(--primary);
+    .tab-item.active {
+      color: #fff;
+      background: var(--red-primary);
+      box-shadow: 0 2px 10px rgba(225, 29, 72, 0.4);
     }
 
-    .search-box {
+    .search-wrapper {
+      position: relative;
       flex: 1;
       max-width: 320px;
-      min-width: 200px;
+      min-width: 220px;
     }
 
-    .search-input {
+    .search-field {
       width: 100%;
-      padding: 0.45rem 0.75rem;
+      padding: 0.55rem 1rem 0.55rem 2.25rem;
       font-family: inherit;
-      font-size: 0.8125rem;
+      font-size: 0.85rem;
+      color: #fff;
+      background: rgba(9, 10, 15, 0.6);
       border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      background-color: var(--bg);
-      color: var(--text);
+      border-radius: 9999px;
       outline: none;
-      transition: border-color 0.15s ease;
+      transition: all 0.2s ease;
     }
 
-    .search-input:focus {
-      border-color: var(--primary);
+    .search-field:focus {
+      border-color: var(--red-primary);
+      box-shadow: 0 0 12px rgba(225, 29, 72, 0.25);
     }
 
-    /* SECTION HEADERS */
-    .section-block {
-      margin-bottom: 3.5rem;
+    .search-icon {
+      position: absolute;
+      left: 0.85rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 14px;
+      height: 14px;
+      stroke: var(--text-dim);
+      fill: none;
+      stroke-width: 2;
     }
 
-    .section-header {
+    /* SECTION TITLES */
+    .block-header {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
+      margin: 3.5rem 0 1.5rem;
       padding-bottom: 0.75rem;
-      margin-bottom: 1.25rem;
-      border-bottom: 2px solid var(--primary);
-    }
-
-    .section-header h2 {
-      font-size: 1.25rem;
-      font-weight: 800;
-      letter-spacing: -0.01em;
-      color: var(--text);
-    }
-
-    .section-count {
-      font-size: 0.8125rem;
-      color: var(--primary);
-      font-weight: 700;
-      background-color: var(--primary-subtle);
-      padding: 0.2rem 0.6rem;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--primary-border);
-    }
-
-    /* BPI CARDS */
-    .subhead {
-      font-size: 0.75rem;
-      font-weight: 800;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: var(--primary);
-      margin-bottom: 0.875rem;
-    }
-
-    .bpi-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 0.875rem;
-      margin-bottom: 2rem;
-    }
-
-    .bpi-card {
-      background-color: var(--bpi-card-bg);
-      border: 1px solid var(--bpi-border);
-      border-radius: var(--radius-md);
-      padding: 1.125rem;
-      position: relative;
-      box-shadow: 0 2px 4px rgba(201, 26, 37, 0.04);
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-    }
-
-    .bpi-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 10px rgba(201, 26, 37, 0.08);
-    }
-
-    .bpi-badge {
-      display: inline-block;
-      font-size: 0.6875rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      padding: 0.15rem 0.5rem;
-      border-radius: var(--radius-sm);
-      background-color: var(--bpi-badge-bg);
-      color: var(--bpi-badge-text);
-      margin-bottom: 0.5rem;
-    }
-
-    .bpi-role {
-      font-size: 0.8125rem;
-      color: var(--text-muted);
-      font-weight: 600;
-    }
-
-    .bpi-name {
-      font-size: 1.125rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-top: 0.125rem;
-    }
-
-    /* DIVISION GRID */
-    .division-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 1rem;
-    }
-
-    .division-card {
-      background-color: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 1.25rem;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
-      transition: transform 0.15s ease;
-    }
-
-    .division-card:hover {
-      transform: translateY(-1px);
-    }
-
-    .div-title-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
       border-bottom: 1px solid var(--border);
     }
 
-    .div-name {
-      font-size: 1rem;
+    .block-title {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .badge-counter {
+      font-size: 0.75rem;
       font-weight: 700;
-      color: var(--text);
+      color: var(--red-light);
+      background: rgba(225, 29, 72, 0.15);
+      border: 1px solid var(--border-red);
+      padding: 0.2rem 0.65rem;
+      border-radius: 9999px;
     }
 
-    .div-badge {
-      font-size: 0.6875rem;
-      font-weight: 600;
+    .sub-section-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
       color: var(--text-muted);
-      background-color: var(--surface-subtle);
-      padding: 0.15rem 0.45rem;
-      border-radius: var(--radius-sm);
+      margin-bottom: 1rem;
     }
 
-    /* CO BOX */
-    .co-row {
-      background-color: var(--co-badge-bg);
-      border: 1px solid var(--co-border);
-      border-radius: var(--radius-sm);
-      padding: 0.625rem 0.75rem;
-      margin-bottom: 0.875rem;
+    /* BPI GRID - EXECUTIVE LUXURY TREATMENT */
+    .bpi-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2.5rem;
     }
 
-    .co-tag {
-      font-size: 0.6875rem;
+    .executive-card {
+      background: linear-gradient(145deg, rgba(26, 29, 42, 0.85), rgba(18, 20, 29, 0.95));
+      border: 1px solid var(--border-red);
+      border-radius: 16px;
+      padding: 1.35rem 1.25rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .executive-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--red-primary), transparent);
+    }
+
+    .executive-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(225, 29, 72, 0.25);
+      border-color: rgba(225, 29, 72, 0.6);
+    }
+
+    .avatar-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1rem;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, rgba(225, 29, 72, 0.25), rgba(225, 29, 72, 0.05));
+      border: 1px solid var(--border-red);
+      color: var(--red-light);
+    }
+
+    .exec-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .exec-role {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--red-light);
+    }
+
+    .exec-name {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #ffffff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top: 0.1rem;
+    }
+
+    /* DIVISION CARDS */
+    .division-deck {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .deck-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.35rem;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.25s ease;
+    }
+
+    .deck-card:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+      background: var(--bg-card-hover);
+      transform: translateY(-2px);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.15rem;
+      padding-bottom: 0.65rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .dept-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .dept-counter {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.05);
+      padding: 0.15rem 0.5rem;
+      border-radius: 9999px;
+    }
+
+    /* CO TIER HIGHLIGHT */
+    .co-spotlight {
+      background: rgba(225, 29, 72, 0.08);
+      border: 1px solid var(--border-red);
+      border-radius: 12px;
+      padding: 0.75rem 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .co-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--red-primary);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(225, 29, 72, 0.4);
+    }
+
+    .co-details {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .co-label {
+      font-size: 0.68rem;
       font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: var(--co-badge-text);
-      margin-bottom: 0.15rem;
+      letter-spacing: 0.06em;
+      color: var(--red-light);
     }
 
     .co-name {
+      font-size: 0.95rem;
       font-weight: 700;
-      font-size: 0.9375rem;
-      color: var(--text);
+      color: #ffffff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    .nim-code {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      font-weight: 500;
-      margin-left: 0.25rem;
-    }
-
-    /* MEMBERS LIST */
-    .members-block {
-      margin-top: 0.25rem;
-    }
-
-    .members-heading {
-      font-size: 0.6875rem;
+    /* MEMBER ROWS */
+    .member-group-label {
+      font-size: 0.7rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: var(--text-soft);
+      letter-spacing: 0.06em;
+      color: var(--text-dim);
       margin-bottom: 0.5rem;
     }
 
-    .member-list {
+    .member-roster {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 0.35rem;
+      gap: 0.45rem;
     }
 
-    .member-item {
+    .roster-row {
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
-      font-size: 0.875rem;
-      padding: 0.25rem 0;
-      border-bottom: 1px dashed var(--border);
+      align-items: center;
+      padding: 0.45rem 0.6rem;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid transparent;
+      transition: all 0.15s ease;
     }
 
-    .member-item:last-child {
-      border-bottom: none;
+    .roster-row:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.06);
     }
 
-    .member-name {
-      color: var(--text);
-      font-weight: 500;
+    .member-side {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      min-width: 0;
     }
 
-    /* FOOTNOTES & FOOTER */
-    .notes-box {
-      margin-top: 2rem;
-      padding: 1.125rem;
-      border-radius: var(--radius-md);
-      background-color: var(--surface);
-      border: 1px solid var(--border);
-      font-size: 0.8125rem;
+    .mini-avatar {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.06);
       color: var(--text-muted);
-      border-left: 4px solid var(--primary);
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+      font-size: 0.7rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .person-name {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #e2e8f0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .nim-pill {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      background: rgba(0, 0, 0, 0.3);
+      padding: 0.15rem 0.5rem;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      flex-shrink: 0;
+    }
+
+    .nim-pill:hover {
+      color: #ffffff;
+      border-color: var(--red-primary);
+      background: rgba(225, 29, 72, 0.15);
+    }
+
+    /* FOOTER & NOTES */
+    .info-footer-card {
+      margin-top: 4rem;
+      padding: 1.25rem 1.5rem;
+      border-radius: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--red-primary);
+      font-size: 0.85rem;
+      color: var(--text-muted);
     }
 
     footer {
       margin-top: 3.5rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--border);
       text-align: center;
-      font-size: 0.8125rem;
-      color: var(--text-muted);
+      font-size: 0.85rem;
+      color: var(--text-dim);
     }
 
-    /* SEARCH FILTER NOT FOUND */
-    .empty-search {
+    /* TOAST NOTIFIKASI COPY */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #e11d48;
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 0.65rem 1.25rem;
+      border-radius: 9999px;
+      box-shadow: 0 8px 24px rgba(225, 29, 72, 0.4);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 9999;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .empty-state {
       display: none;
       text-align: center;
-      padding: 3rem 1rem;
+      padding: 4rem 1rem;
       color: var(--text-muted);
-      font-size: 0.9375rem;
+      font-size: 1rem;
+    }
+
+    @media (max-width: 640px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .top-bar {
+        border-radius: 16px;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .control-panel {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .search-wrapper {
+        max-width: 100%;
+      }
     }
 
     @media print {
       body {
         background: #ffffff !important;
-        background-image: none !important;
         color: #000000 !important;
         padding: 0;
       }
-      body::before {
+      .bg-ambient, .bg-grid, .top-bar, .control-panel, .btn-action {
         display: none !important;
       }
-      .top-bar, .controls-bar, .theme-toggle, .btn {
-        display: none !important;
-      }
-      .summary-card, .bpi-card, .division-card, .notes-box {
-        border-color: #cbd5e1 !important;
+      .stat-box, .executive-card, .deck-card, .info-footer-card {
+        border: 1px solid #ccc !important;
+        background: #fff !important;
         box-shadow: none !important;
-        background: #ffffff !important;
         page-break-inside: avoid;
       }
-      .bpi-name, .div-name, .co-name, .member-name, h1, h2 {
+      .hero h1, .hero h1 span.crimson, .exec-name, .dept-title, .co-name, .person-name {
         color: #000000 !important;
+        text-shadow: none !important;
+      }
+      .nim-pill {
+        color: #333 !important;
+        border-color: #ccc !important;
       }
     }
   </style>
 </head>
 <body>
+  <!-- AMBIENT EFFECT -->
+  <div class="bg-ambient"></div>
+  <div class="bg-grid"></div>
+
   <div class="container">
     <!-- TOP BAR -->
-    <div class="top-bar">
-      <div class="flag-badge">
-        <span class="flag-pill"></span>
-        <span>Struktur Organisasi &bull; Edisi Merah Putih</span>
+    <header class="top-bar">
+      <div class="brand-pill">
+        <span class="flag-wave"></span>
+        <span>Struktur Organisasi 2024/2025</span>
+      </div>
+      <div class="status-badge">
+        <span class="pulse-dot"></span>
+        <span>Bagan Resmi Terverifikasi</span>
       </div>
       <div class="top-actions">
-        <button class="btn" id="themeBtn" aria-label="Ganti Tema">
-          <span id="themeLabel">Mode Gelap</span>
-        </button>
-        <button class="btn primary" onclick="window.print()">
-          Cetak / PDF
+        <button class="btn-action red" onclick="window.print()">
+          Cetak Dokumen
         </button>
       </div>
-    </div>
-
-    <!-- MAIN HEADER -->
-    <header>
-      <div class="header-badge-bg">Periode Kepengurusan Aktif</div>
-      <h1>Struktur Kepengurusan <span class="highlight">Organisasi</span></h1>
-      <p class="subtitle">Bagan Resmi Badan Pengurus Inti (BPI), Koordinator, dan Anggota Divisi.</p>
     </header>
 
-    <!-- REKAPITULASI DATA -->
-    <div class="summary-grid">
-      <div class="summary-card featured">
-        <div class="summary-num">47</div>
-        <div class="summary-label">Total Personel (46 Unik)</div>
+    <!-- HERO -->
+    <div class="hero">
+      <span class="hero-tag">Official Directory</span>
+      <h1>Struktur Dewan <span class="crimson">Kepengurusan</span></h1>
+      <p>Bagan hierarki Badan Pengurus Inti (BPI), Koordinator Divisi, dan Anggota Aktif.</p>
+    </div>
+
+    <!-- STATS STRIP -->
+    <div class="stats-strip">
+      <div class="stat-box highlight">
+        <div class="stat-val">47</div>
+        <div class="stat-desc">Total Personel (46 Unik)</div>
       </div>
-      <div class="summary-card">
-        <div class="summary-num">24</div>
-        <div class="summary-label">Pengurus Putra</div>
+      <div class="stat-box">
+        <div class="stat-val">24</div>
+        <div class="stat-desc">Bagian Putra</div>
       </div>
-      <div class="summary-card">
-        <div class="summary-num">23</div>
-        <div class="summary-label">Pengurus Putri</div>
+      <div class="stat-box">
+        <div class="stat-val">23</div>
+        <div class="stat-desc">Bagian Putri</div>
       </div>
-      <div class="summary-card">
-        <div class="summary-num">8</div>
-        <div class="summary-label">Badan Pengurus Inti (BPI)</div>
+      <div class="stat-box">
+        <div class="stat-val">8</div>
+        <div class="stat-desc">BPI (Pimpinan Inti)</div>
       </div>
-      <div class="summary-card">
-        <div class="summary-num">39</div>
-        <div class="summary-label">Pengurus Divisi (10 CO + 29 Anggota)</div>
+      <div class="stat-box">
+        <div class="stat-val">39</div>
+        <div class="stat-desc">Pengurus Divisi (10 CO)</div>
       </div>
     </div>
 
-    <!-- CONTROLS: FILTER & LIVE SEARCH -->
-    <div class="controls-bar">
-      <div class="filter-tabs" role="tablist">
-        <button class="tab-btn active" data-filter="all">Semua Pengurus</button>
-        <button class="tab-btn" data-filter="putra">Khusus Putra</button>
-        <button class="tab-btn" data-filter="putri">Khusus Putri</button>
-        <button class="tab-btn" data-filter="bpi">BPI Saja</button>
+    <!-- CONTROL PANEL -->
+    <div class="control-panel">
+      <div class="nav-tabs" role="tablist">
+        <button class="tab-item active" data-filter="all">Semua Pengurus</button>
+        <button class="tab-item" data-filter="putra">Khusus Putra</button>
+        <button class="tab-item" data-filter="putri">Khusus Putri</button>
+        <button class="tab-item" data-filter="bpi">BPI Inti</button>
       </div>
-      <div class="search-box">
+      <div class="search-wrapper">
+        <svg class="search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
         <input 
           type="text" 
           id="searchInput" 
-          class="search-input" 
+          class="search-field" 
           placeholder="Cari nama atau NIM..."
           autocomplete="off"
         >
       </div>
     </div>
 
-    <div id="emptySearch" class="empty-search">
-      Tidak ada pengurus yang sesuai dengan kata kunci pencarian.
+    <div id="emptySearch" class="empty-state">
+      Tidak menemukan pengurus dengan kata kunci tersebut.
     </div>
 
-    <!-- SECTION: PUTRA -->
-    <section class="section-block section-group" data-group="putra">
-      <div class="section-header">
-        <h2>Kepengurusan Bagian Putra</h2>
-        <span class="section-count">24 Personel</span>
+    <!-- MAIN SECTION: PUTRA -->
+    <section class="section-group" data-group="putra">
+      <div class="block-header">
+        <div class="block-title">
+          <span>Pengurus Bagian Putra</span>
+          <span class="badge-counter">24 Personel</span>
+        </div>
       </div>
 
       <!-- BPI PUTRA -->
-      <div class="bpi-container" data-type="bpi">
-        <div class="subhead">Badan Pengurus Inti (BPI) Putra</div>
-        <div class="bpi-grid">
-          <div class="bpi-card member-record" data-keywords="adi wijaya ketua bpi putra">
-            <span class="bpi-badge">BPI Putra</span>
-            <div class="bpi-role">Ketua</div>
-            <div class="bpi-name">Adi Wijaya</div>
+      <div class="bpi-box" data-type="bpi">
+        <div class="sub-section-title">Badan Pengurus Inti (BPI Putra)</div>
+        <div class="bpi-row">
+          <div class="executive-card member-record" data-keywords="adi wijaya ketua bpi putra">
+            <div class="avatar-circle">AW</div>
+            <div class="exec-info">
+              <div class="exec-role">Ketua</div>
+              <div class="exec-name">Adi Wijaya</div>
+            </div>
           </div>
-          <div class="bpi-card member-record" data-keywords="ragel wakil ketua bpi putra">
-            <span class="bpi-badge">BPI Putra</span>
-            <div class="bpi-role">Wakil Ketua</div>
-            <div class="bpi-name">Ragel</div>
+          <div class="executive-card member-record" data-keywords="ragel wakil ketua bpi putra">
+            <div class="avatar-circle">RG</div>
+            <div class="exec-info">
+              <div class="exec-role">Wakil Ketua</div>
+              <div class="exec-name">Ragel</div>
+            </div>
           </div>
-          <div class="bpi-card member-record" data-keywords="nur hasan sekretaris bpi putra">
-            <span class="bpi-badge">BPI Putra</span>
-            <div class="bpi-role">Sekretaris</div>
-            <div class="bpi-name">Nur Hasan</div>
+          <div class="executive-card member-record" data-keywords="nur hasan sekretaris bpi putra">
+            <div class="avatar-circle">NH</div>
+            <div class="exec-info">
+              <div class="exec-role">Sekretaris</div>
+              <div class="exec-name">Nur Hasan</div>
+            </div>
           </div>
-          <div class="bpi-card member-record" data-keywords="yaza bendahara bpi putra">
-            <span class="bpi-badge">BPI Putra</span>
-            <div class="bpi-role">Bendahara</div>
-            <div class="bpi-name">Yaza</div>
+          <div class="executive-card member-record" data-keywords="yaza bendahara bpi putra">
+            <div class="avatar-circle">YZ</div>
+            <div class="exec-info">
+              <div class="exec-role">Bendahara</div>
+              <div class="exec-name">Yaza</div>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- DIVISI PUTRA -->
-      <div class="division-container" data-type="divisi">
-        <div class="subhead">Divisi-Divisi Pengurus Putra</div>
-        <div class="division-grid">
+      <div class="divisi-box" data-type="divisi">
+        <div class="sub-section-title">Divisi Pengurus Putra</div>
+        <div class="division-deck">
           <!-- Keilmuan -->
-          <div class="division-card member-record" data-keywords="keilmuan iqromul muslimin moh sahla hamdani moh afif amuy muhammad farhan zaky 2521400004 2521400040 2421400147 2521400138">
-            <div class="div-title-row">
-              <span class="div-name">Divisi Keilmuan</span>
-              <span class="div-badge">5 Personel</span>
+          <div class="deck-card member-record" data-keywords="keilmuan iqromul muslimin moh sahla hamdani moh afif amuy muhammad farhan zaky 2521400004 2521400040 2421400147 2521400138">
+            <div class="card-top">
+              <span class="dept-title">Divisi Keilmuan</span>
+              <span class="dept-counter">5 Personel</span>
             </div>
-            <div class="co-row">
-              <div class="co-tag">Koordinator (CO)</div>
-              <div class="co-name">Iqromul Muslimin <span class="nim-code">2521400004</span></div>
+            <div class="co-spotlight">
+              <div class="co-avatar">IM</div>
+              <div class="co-details">
+                <div class="co-label">Koordinator (CO)</div>
+                <div class="co-name">Iqromul Muslimin</div>
+              </div>
+              <span class="nim-pill" onclick="copyNIM('2521400004')">2521400004</span>
             </div>
-            <div class="members-block">
-              <div class="members-heading">Anggota</div>
-              <ul class="member-list">
-                <li class="member-item">
-                  <span class="member-name">Moh. Sahla Hamdani</span>
-                  <span class="nim-code">2521400040</span>
-                </li>
-                <li class="member-item">
-                  <span class="member-name">Iqromul Muslimin*</span>
-                  <span class="nim-code">2521400004</span>
-                </li>
-                <li class="member-item">
-                  <span class="member-name">Moh. Afif Amuy*</span>
-                  <span class="nim-code">2421400147</span>
-                </li>
-                <li class="member-item">
-                  <span class="member-name">Muhammad Farhan Zaky</span>
-                  <span class="nim-code">2521400138</span>
-                </li>
-              </ul>
-            </div>
+            <div class="member-group-label">Anggota Divisi</div>
+            <ul class="member-roster">
+              <li class="roster-row">
+                <div class="member-side">
+                  <span class="mini-avatar">MS</span>
+                  <span class="person-name">Moh. Sahla Hamdani</span>
+                </div>
+                <span class="nim-pill" onclick="copyNIM('2521400040')">2521400040</span>
+              </li>
+              <li class="roster-row">
+                <div class="member-side">
+                  <span class="mini-avatar">IM</span>
+                  <span class="person-name">Iqromul Muslimin*</span>
+                </div>
+                <span class="nim-pill" onclick="copyNIM('2521400004')">2521400004</span>
+              </li>
+              <li class="roster-row">
+                <div class="member-side">
+                  <span class="mini-avatar">MA</span>
+                  <span class="person-name">Moh. Afif Amuy*</span>
+                </div>
+                <span class="nim-pill" onclick="copyNIM('2421400147')">2421400147</span>
+              </li>
+              <li class="roster-row">
+                <div class="member-side">
+                  <span class="mini-avatar">FZ</span>
+                  <span class="person-name">Muhammad Farhan Zaky</span>
+                </div>
+                <span class="nim-pill" onclick="copyNIM('2521400138')">2521400138</span>
+              </li>
+            </ul>
           </div>
 
           <!-- Kominfo -->
-          <div class="division-card member-record" data-keywords="kominfo syaban ainul kirom mohammad taufiqur rahman moch hadiq masyfuk ryan irwansyah ainur ridho hidayatullah 2421400075 2521400008 2521400011 2521400030 2521400041">
-            <div class="div-title-row">
-              <span class="div-name">Divisi Kominfo</span>
-              <span class="div-badge">5 Personel</span>
+          <div class="deck-card member-record" data-keywords="kominfo syaban ainul kirom mohammad taufiqur rahman moch hadiq masyfuk ryan irwansyah ainur ridho hidayatullah 2421400075 2521400008 2521400011 2521400030 2521400041">
+            <div class="card-top">
+              <span class="dept-title">Divisi Kominfo</span>
+              <span class="dept-counter">5 Personel</span>
             </div>
-            <div class="co-row">
-              <div class="co-tag">Koordinator (CO)</div>
-              <div class="co-name">Syaban Ainul Kirom <span class="nim-code">2421400075</span></div>
+            <div class="co-spotlight">
+              <div class="co-avatar">SK</div>
+              <div class="co-details">
+                <div class="co-label">Koordinator (CO)</div>
+                <div class="co-name">Syaban Ainul Kirom</div>
+              </div>
+              <span class="nim-pill" onclick="copyNIM('2421400075')">2421400075</span>
             </div>
-            <div class="members-block">
-              <div class="members-heading">Anggota</div>
-              <ul class="member-list">
-                <li class="member-item">
-                  <span class="member-name">Mohammad Taufiqur Rahman</span>
-                  <span class="nim-code">2521400008</span>
-                </li>
-                <li class="member-item">
-                  <span class="member-name">Moch. Hadiq Masyfuk</span>
-                  <span class="nim-code">2521400011</span>
-                </li>
-                <li class="member-item">
-                  <span class="member-name">Ryan Irwansyah</span>
-                  <span class="nim-code">2521400030</span>
-                </li>
-                <li class="member-item">
-                  <span class="member-name">Ainur Ridho Hidayatullah</span>
-                  <span class="nim-code">2521400041</span>
-                </li>
-              </ul>
-            </div>
+            <div class="member-group-label">Anggota Divisi</div>
+            <ul class="member-roster">
+              <li class="roster-row">
+                <div class="member-side">
+                  <span class="mini-avatar">TR</span>
+                  <span class="person-name">Mohammad Taufiqur Rahman</span>
+                </div>
+                <span class="nim-pill" onclick="copyNIM('2521400008')">2521400008</span>
+              </li>
+              <li class="roster-row">
+                <div class="member-side">
+                  <span class="mini-avatar">HM</span>
+                  <span class="person-name">Moch. Hadiq Masyfuk</span>
+                </div>
+                <span class="nim-pill" onclick="copyNIM('2521400011')">2521400011</span>
+              </li>
+              <li class="roster-row">
+                <div class="member-side">
+                  <span class="mini-avatar">RI</span>
+                  <span class="person-name">Ryan Irwansyah</span>
+                </div>
+                <span class="nim-pill" onclick="copyNIM('2521400030')">2521400030</span>
+              </li>
+              <li class="roster-row">
+                <div class="member-side">
+                  <span class="mini-avatar">AR</span>
+                  <span class="person-name">Ainur Ridho Hidayatullah</span>
+                </div>
+                <span class="nim-pill" onclick="copyNIM('2521400041')">2521400041</span>
+              </li>
+            </ul>
           </div>
 
           <!-- Kaderisasi -->
-          <div class="division-card member-record" data-keywords="kaderisasi rama yudha fitriansyah fadila firmansyah mahfud nadi barokah jibril prabu surya 2521400002 2521400095 2421400088 2521400052">
-            <div class="div-title-row">
-              <span class="div-name">Divisi Kaderisasi</span>
-              <span class="div-badge">4 Personel</span>
+          <div class="deck-card member-record" data-keywords="kaderisasi rama yudha fitriansyah fadila firmansyah mahfud nadi barokah jibril prabu surya 2521400002 2521400095 2421400088 2521400052">
+            <div class="card-top">
+              <span class="dept-title">Divisi Kaderisasi</span>
+              <span class="dept-counter">4 Personel</span>
             </div>
-            <div class="co-row">
-              <div class="co-tag">Koordinator (CO)</div>
-              <div class="co-name">Rama Yudha Fitriansyah <span class="nim-code">2521400002</span></div>
+            <div class="co-spotlight">
+              <div class="co-avatar">RF</div>
+              <div class="co-details">
+                <div class="co-label">Koordinator (CO)</div>
+                <div class="co-name">Rama Yudha Fitriansyah</div>
+              </div>
+              <span class="nim-pill" onclick="copyNIM('2521400002')">2521400002</span>
             </div>
-            <div class="members-block">
-              <div class="members-heading">Anggota</div>
-              <ul class="member-list">
-                <li class="member-item">
-                  <span class="member-name">Fadila Firmansyah</span>
-                  <span class="nim-code">2521400095</span>
-                </li>
-                <li class="member-item">
-                  <span class="member-name">Mahfud Nadi Barokah</span>
-                  <span class="nim-code">2421400088</span>
-                </li>
-                <li class="member-item">
-                  <span class="member-name">Jibril Prabu Surya</span>
-                  <span class="nim-code">2521400052</span>
-                </li>
-              </ul>
-            </div>
+            <div class="member-group-label">Anggota Divisi</div>
+            <ul class="member-roster">
+              <li class="roster-row">
+                <div class="member-side">
+                  <span class="mini-avatar">FF</span>
+                  <span class="person-name">Fadila Firmansyah</span>
+                </div>
+                <span class="nim-pill" onclick="copyNIM('2521400095')">2521400095</span>
+              </li>
+              <li class="roster-row">
+                <div class="member-side">
+                  <span class="mini-avatar">MB</span>
+                  <span class="person-name">Mahfud Nadi Barokah</span>
+                </div>
+                <span class="nim-pill" onclick="copyNIM('2421400088')">2421400088</span>
+              </li>
+              <li class="roster-row">
+                <div class="member-side">
+                  <span class="mini-avatar">JP</span>
+                  <span class="person-name">Jibril Prabu Surya</span>
+                </div>
+                <span class="nim-pill" onclick="copyNIM('2521400052')">2521400052</span>
+              </li>
+            </ul>
           </div>
 
           <!-- Litbang -->
-          <div class="division-card member-record" data-keywords="litbang mohammad rizqi maulana ramadani zainal abidin 2521400012 2521400016 2421400162">
-            <div class="div-title-row">
-              <span class="div-name">Divisi Litbang</span>
-              <span class="div-badge">3 Personel</span>
+          <div class="deck-card member-record" data-keywords="litbang mohammad rizqi maulana ramadani zainal abidin 2521400012 2521400016 2421400162">
+            <div class="card-top">
+              <span class="dept-title">Divisi Litbang</span>
+              <span class="dept-counter">3 Personel</span>
             </div>
-            <div class="co-row">
-              <div class="co-tag">Koordinator (CO)</div>
-              <div class="co-name">Mohammad Rizqi Maulana <span class="nim-code">2521400012</span></div>
+            <div class="co-spotlight">
+              <div class="co-avatar">RM</div>
+              <div class="co-details">
+                <div class="co-label">Koordinator (CO)</div>
+                <div class="co-name">Mohammad Rizqi Maulana</div>
+              </div>
+              <span class="nim-pill" onclick="copyNIM('2521400012')">2521400012</span>
             </div>
-            <div class="members-block">
-              <div class="members-heading">Anggota</div>
-              <ul class="member-list">
-                <li class="member-item">
-                  <span class="member-name">Ramadani</span>
-                  <span class="nim-code">2521400016</span>
-                </li>
-                <li class="member-item">
-                  <span class="member-name">Zainal Abidin</span>
-                  <span class="nim-code">2421400162</span>
-                </li>
-              </ul>
-            </div>
+            <div class="member-group-label">Anggota Divisi</div>
+            <ul class="member-roster">
+              <li class="roster-row">
+                <div class="member-side">
+                  <span class="mini-avatar">RD</span>
+                  <span class="person-name">Ramadani</span>
+                </div>
+                <span class="nim-pill" onclick="copyNIM('2521400016')">2521400016</span>
+              </li>
+              <li class="roster-row">
+                <div class="member-side">
+                  <span class="mini-avatar">ZA</span>
+                  <span class="person-name">Zainal Abidin</span>
+                </div>
+                <span class="nim-pill" onclick="copyNIM('2421400162')">2421400162</span>
+              </li>
+            </ul>
           </div>
 
           <!-- Publik Relasi -->
-          <div class="division-card member-record" data-keywords="publik relasi humas ahmad farel febrian pratama abd rahman febryan syafii moch taufiqi 2421400062 2521400105 2421400171">
-            <div class="div-title-row">
-              <span class="div-name">Divisi Publik Relasi</span>
-              <span class="div-badge">3 Personel</span>
+          <div class="deck-card member-record" data-keywords="publik relasi humas ahmad farel febrian pratama abd rahman febryan syafii moch taufiqi 2421400062 2521400105 2421400171">
+            <div class="card-top">
+              <span class="dept-title">Divisi Publik Relasi</span>
+              <span class="dept-counter">3 Personel</span>
             </div>
-            <div class="co-row">
-              <div class="co-tag">Koordinator (CO)</div>
-              <div class="co-name">Ahmad Farel Febrian Pratama <span class="nim-code">2421400062</span></div>
+            <div class="co-spotlight">
+              <div class="co-avatar">AF</div>
+              <div class="co-details">
+                <div class="co-label">Koordinator (CO)</div>
+                <div class="co-name">Ahmad Farel Febrian Pratama</div>
+              </div>
+              <span class="nim-pill" onclick="copyNIM('2421400062')">2421400062</span>
             </div>
-            <div class="members-block">
-              <div class="members-heading">Anggota</div>
-              <ul class="member-list">
-                <li class="member-item">
-                  <span class="member-name">Abd Rahman Febryan Syafii</span>
-                  <span class="nim-code">2521400105</span>
-                </li>
-                <li class="member-item">
-                  <span class="member-name">Moch. Taufiqi</span>
-                  <span class="nim-code">2421400171</span>
-                </li>
-              </ul>
-            </div>
+            <div class="member-group-label">Anggota Divisi</div>
+            <ul class="member-roster">
+              <li class="roster-row">
+                <div class="member-side">
+                  <span class="mini-avatar">AR</span>
+                  <span class="person-name">Abd Rahman Febryan Syafii</span>
+                </div>
+                <span class="nim-pill" onclick="copyNIM('2521400105')">2521400105</span>
+              </li>
+              <li class="roster-row">
+                <div class="member-side">
+                  <span class="mini-avatar">MT</span>
+                  <span class="person-name">Moch. Taufiqi</span>
+                </div>
+                <span class="nim-pill" onclick="copyNIM('2421400171')">2421400171</span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- SECTION: PUTRI -->
-    <section class="section-block section-group" data-group="putri">
-      <div class="section-header">
-        <h2>Kepengurusan Bagian Putri</h2>
-        <span class="section-count">23 Personel</span>
+    <!-- MAIN SECTION: PUTRI -->
+    <section class="section-group" data-group="putri">
+      <div class="block-header">
+        <div class="block-title">
+          <span>Pengurus Bagian Putri</span>
+          <span class="badge-counter">23 Personel</span>
+        </div>
       </div>
 
       <!-- BPI PUTRI -->
-      <div class="bpi-container" data-type="bpi">
-        <div class="subhead">Badan Pengurus Inti (BPI) Putri</div>
-        <div class="bpi-grid">
-          <div class="bpi-card member-record" data-keywords="nadira ketua bpi putri">
-            <span class="bpi-badge">BPI Putri</span>
-            <div class="bpi-role">Ketua</div>
-            <div class="bpi-name">Nadira</div>
+      <div class="bpi-box" data-type="bpi">
+        <div class="sub-section-title">Badan Pengurus Inti (BPI Putri)</div>
+        <div class="bpi-row">
+          <div class="executive-card member-record" data-keywords="nadira ketua bpi putri">
+            <div class="avatar-circle">ND</div>
+            <div class="exec-info">
+              <div class="exec-role">Ketua</div>
+              <div class="exec-name">Nadira</div>
+            </div>
           </div>
-          <div class="bpi-card member-record" data-keywords="nia wakil ketua bpi putri">
-            <span class="bpi-badge">BPI Putri</span>
-            <div class="bpi-role">Wakil Ketua</div>
-            <div class="bpi-name">Nia</div>
+          <div class="executive-card member-record" data-keywords="nia wakil ketua bpi putri">
+            <div class="avatar-circle">NI</div>
+            <div class="exec-info">
+              <div class="exec-role">Wakil Ketua</div>
+              <div class="exec-name">Nia</div>
+            </div>
           </div>
-          <div class="bpi-card member-record" data-keywords="fafi sekretaris bpi putri">
-            <span class="bpi-badge">BPI Putri</span>
-            <div class="bpi-role">Sekretaris</div>
-            <div class="bpi-name">Fafi</div>
+          <div class="executive-card member-record" data-keywords="fafi sekretaris bpi putri">
+            <div class="avatar-circle">FF</div>
+            <div class="exec-info">
+              <div class="exec-role">Sekretaris</div>
+              <div class="exec-name">Fafi</div>
+            </div>
           </div>
-          <div class="bpi-card member-record" data-keywords="novel bendahara bpi putri">
-            <span class="bpi-badge">BPI Putri</span>
-            <div class="bpi-role">Bendahara</div>
-            <div class="bpi-name">Novel</div>
+          <div class="executive-card member-record" data-keywords="novel bendahara bpi putri">
+            <div class="avatar-circle">NV</div>
+            <div class="exec-info">
+              <div class="exec-role">Bendahara</div>
+              <div class="exec-name">Novel</div>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- DIVISI PUTRI -->
-      <div class="division-container" data-type="divisi">
-        <div class="subhead">Divisi-Divisi Pengurus Putri</div>
-        <div class="division-grid">
+      <div class="divisi-box" data-type="divisi">
+        <div class="sub-section-title">Divisi Pengurus Putri</div>
+        <div class="division-deck">
           <!-- Keilmuan -->
-          <div class="division-card member-record" data-keywords="keilmuan rohimatul munibah nihayah durrotul maknunah nabila angie novriliana syafinah muthia chanza nabila aprilia putri 2421400017 2521400065 2521400060 2521400139 2521400116">
-            <div class="div-title-row">
-              <span class="div-name">Divisi Keilmuan</span>
-              <span class="div-badge">5 Personel</span>
+          <div class="deck-card member-record" data-keywords="keilmuan rohimatul munibah nihayah durrotul maknunah nabila angie novriliana syafinah muthia chanza nabila aprilia putri 2421400017 2521400065 2521400060 2521400139 2521400116">
+            <div class="card-top">
+              <span class="dept-title">Divisi Keilmuan</span>
+              <span class="dept-counter">5 Personel</span>
             </div>
-            <div class="co-row">
-              <div class="co-tag">Koordinator (CO)</div>
-              <div class="co-name">Rohimatul Munibah <span class="nim-code">2421400017</span></div>
+            <div class="co-spotlight">
+              <div class="co-avatar">RM</div>
+              <div class="co-details">
+                <div class="co-label">Koordinator (CO)</div>
+                <div class="co-name">Rohimatul Munibah</div>
+              </div>
+              <span class="nim-pill" onclick="copyNIM('2421400017')">2421400017</span>
             </div>
-            <div class="members-block">
-              <div class="members-heading">Anggota</div>
-              <ul class="member-list">
-                <li class="member-item">
-                  <span class="member-name">Nihayah Durrotul Maknunah</span>
-                  <span class="nim-code">2521400065</span>
-                </li>
-                <li class="member-item">
-                  <span class="member-name">Nabila Angie Novriliana</span>
-                  <span class="nim-code">2521400060</span>
-                </li>
-                <li class="member-item">
-                  <span class="member-name">Syafinah Muthia Chanza</span>
-                  <span class="nim-code">2521400139</span>
-                </li>
-                <li class="member-item">
-                  <span class="member-name">Nabila Aprilia Putri</span>
-                  <span class="nim-code">2521400116</span>
-                </li>
-              </ul>
-            </div>
+            <div class="member-group-label">Anggota Divisi</div>
+            <ul class="member-roster">
+              <li class="roster-row">
+                <div class="member-side">
+                  <span class="mini-avatar">ND</span>
+                  <span class="person-name">Nihayah Durrotul Maknunah</span>
+                </div>
+                <span class="nim-pill" onclick="copyNIM('2521400065')">2521400065</span>
+              </li>
+              <li class="roster-row">
+                <div class="member-side">
+                  <span class="mini-avatar">NA</span>
+                  <span class="person-name">Nabila Angie Novriliana</span>
+                </div>
+                <span class="nim-pill" onclick="copyNIM('2521400060')">2521400060</span>
+              </li>
+              <li class="roster-row">
+                <div class="member-side">
+                  <span class="mini-avatar">SM</span>
+                  <span class="person-name">Syafinah Muthia Chanza</span>
+                </div>
+                <span class="nim-pill" onclick="copyNIM('2521400139')">2521400139</span>
+              </li>
+              <li class="roster-row">
+                <div class="member-side">
+                  <span class="mini-avatar">NP</span>
+                  <span class="person-name">Nabila Aprilia Putri</span>
+                </div>
+                <span class="nim-pill" onclick="copyNIM('2521400116')">2521400116</span>
+              </li>
+            </ul>
           </div>
 
           <!-- Kominfo -->
-          <div class="division-card member-record" data-keywords="kominfo sifriah aini amelines inneza putri mahdaniyah kurrotun aini deswita aulia asyiqin lailatus syarifah 2421400072 2521400023 2521400073 2521400134 252140011">
-            <div class="div-title-row">
-              <span class="div-name">Divisi Kominfo</span>
-              <span class="div-badge">5 Personel</span>
+          <div class="deck-card member-record" data-keywords="kominfo sifriah aini amelines inneza putri mahdaniyah kurrotun aini deswita aulia asyiqin lailatus syarifah 2421400072 2521400023 2521400073 2521400134 252140011">
+            <div class="card-top">
+              <span class="dept-title">Divisi Kominfo</span>
+              <span class="dept-counter">5 Personel</span>
             </div>
-            <div class="co-row">
-              <div class="co-tag">Koordinator (CO)</div>
-              <div class="co-name">Sifriah Aini <span class="nim-code">2421400072</span></div>
+            <div class="co-spotlight">
+              <div class="co-avatar">SA</div>
+              <div class="co-details">
+                <div class="co-label">Koordinator (CO)</div>
+                <div class="co-name">Sifriah Aini</div>
+              </div>
+              <span class="nim-pill" onclick="copyNIM('2421400072')">2421400072</span>
             </div>
-            <div class="members-block">
-              <div class="members-heading">Anggota</div>
-              <ul class="member-list">
-                <li class="member-item">
-                  <span class="member-name">Amelines Inneza Putri Mahdaniyah</span>
-                  <span class="nim-code">2521400023</span>
-                </li>
-                <li class="member-item">
-                  <span class="member-name">Kurrotun Aini</span>
-                  <span class="nim-code">2521400073</span>
-                </li>
-                <li class="member-item">
-                  <span class="member-name">Deswita Aulia Asyiqin</span>
-                  <span class="nim-code">2521400134</span>
-                </li>
-                <li class="member-item">
-                  <span class="member-name">Lailatus Syarifah</span>
-                  <span class="nim-code">252140011</span>
-                </li>
-              </ul>
-            </div>
+            <div class="member-group-label">Anggota Divisi</div>
+            <ul class="member-roster">
+              <li class="roster-row">
+                <div class="member-side">
+                  <span class="mini-avatar">AI</span>
+                  <span class="person-name">Amelines Inneza Putri Mahdaniyah</span>
+                </div>
+                <span class="nim-pill" onclick="copyNIM('2521400023')">2521400023</span>
+              </li>
+              <li class="roster-row">
+                <div class="member-side">
+                  <span class="mini-avatar">KA</span>
+                  <span class="person-name">Kurrotun Aini</span>
+                </div>
+                <span class="nim-pill" onclick="copyNIM('2521400073')">2521400073</span>
+              </li>
+              <li class="roster-row">
+                <div class="member-side">
+                  <span class="mini-avatar">DA</span>
+                  <span class="person-name">Deswita Aulia Asyiqin</span>
+                </div>
+                <span class="nim-pill" onclick="copyNIM('2521400134')">2521400134</span>
+              </li>
+              <li class="roster-row">
+                <div class="member-side">
+                  <span class="mini-avatar">LS</span>
+                  <span class="person-name">Lailatus Syarifah</span>
+                </div>
+                <span class="nim-pill" onclick="copyNIM('252140011')">252140011</span>
+              </li>
+            </ul>
           </div>
 
           <!-- Kaderisasi -->
-          <div class="division-card member-record" data-keywords="kaderisasi najwa karimah nur diana holida lifa abidatus sholihah mutia selviani 2421400079 2521400059 2521400028">
-            <div class="div-title-row">
-              <span class="div-name">Divisi Kaderisasi</span>
-              <span class="div-badge">3 Personel</span>
+          <div class="deck-card member-record" data-keywords="kaderisasi najwa karimah nur diana holida lifa abidatus sholihah mutia selviani 2421400079 2521400059 2521400028">
+            <div class="card-top">
+              <span class="dept-title">Divisi Kaderisasi</span>
+              <span class="dept-counter">3 Personel</span>
             </div>
-            <div class="co-row">
-              <div class="co-tag">Koordinator (CO)</div>
-              <div class="co-name">Najwa Karimah <span class="nim-code">2421400079</span></div>
+            <div class="co-spotlight">
+              <div class="co-avatar">NK</div>
+              <div class="co-details">
+                <div class="co-label">Koordinator (CO)</div>
+                <div class="co-name">Najwa Karimah</div>
+              </div>
+              <span class="nim-pill" onclick="copyNIM('2421400079')">2421400079</span>
             </div>
-            <div class="members-block">
-              <div class="members-heading">Anggota</div>
-              <ul class="member-list">
-                <li class="member-item">
-                  <span class="member-name">Nur Diana Holida (Lifa)</span>
-                  <span class="nim-code">2521400059</span>
-                </li>
-                <li class="member-item">
-                  <span class="member-name">Abidatus Sholihah Mu'tia Selviani</span>
-                  <span class="nim-code">2521400028</span>
-                </li>
-              </ul>
-            </div>
+            <div class="member-group-label">Anggota Divisi</div>
+            <ul class="member-roster">
+              <li class="roster-row">
+                <div class="member-side">
+                  <span class="mini-avatar">ND</span>
+                  <span class="person-name">Nur Diana Holida (Lifa)</span>
+                </div>
+                <span class="nim-pill" onclick="copyNIM('2521400059')">2521400059</span>
+              </li>
+              <li class="roster-row">
+                <div class="member-side">
+                  <span class="mini-avatar">AS</span>
+                  <span class="person-name">Abidatus Sholihah Mu'tia Selviani</span>
+                </div>
+                <span class="nim-pill" onclick="copyNIM('2521400028')">2521400028</span>
+              </li>
+            </ul>
           </div>
 
           <!-- Litbang -->
-          <div class="division-card member-record" data-keywords="litbang risqi wulandari nuri meidina putri jihan nabilla 2421400069 2521400061 2521400094">
-            <div class="div-title-row">
-              <span class="div-name">Divisi Litbang</span>
-              <span class="div-badge">3 Personel</span>
+          <div class="deck-card member-record" data-keywords="litbang risqi wulandari nuri meidina putri jihan nabilla 2421400069 2521400061 2521400094">
+            <div class="card-top">
+              <span class="dept-title">Divisi Litbang</span>
+              <span class="dept-counter">3 Personel</span>
             </div>
-            <div class="co-row">
-              <div class="co-tag">Koordinator (CO)</div>
-              <div class="co-name">Risqi Wulandari <span class="nim-code">2421400069</span></div>
+            <div class="co-spotlight">
+              <div class="co-avatar">RW</div>
+              <div class="co-details">
+                <div class="co-label">Koordinator (CO)</div>
+                <div class="co-name">Risqi Wulandari</div>
+              </div>
+              <span class="nim-pill" onclick="copyNIM('2421400069')">2421400069</span>
             </div>
-            <div class="members-block">
-              <div class="members-heading">Anggota</div>
-              <ul class="member-list">
-                <li class="member-item">
-                  <span class="member-name">Nuri Meidina Putri</span>
-                  <span class="nim-code">2521400061</span>
-                </li>
-                <li class="member-item">
-                  <span class="member-name">Jihan Nabilla</span>
-                  <span class="nim-code">2521400094</span>
-                </li>
-              </ul>
-            </div>
+            <div class="member-group-label">Anggota Divisi</div>
+            <ul class="member-roster">
+              <li class="roster-row">
+                <div class="member-side">
+                  <span class="mini-avatar">NM</span>
+                  <span class="person-name">Nuri Meidina Putri</span>
+                </div>
+                <span class="nim-pill" onclick="copyNIM('2521400061')">2521400061</span>
+              </li>
+              <li class="roster-row">
+                <div class="member-side">
+                  <span class="mini-avatar">JN</span>
+                  <span class="person-name">Jihan Nabilla</span>
+                </div>
+                <span class="nim-pill" onclick="copyNIM('2521400094')">2521400094</span>
+              </li>
+            </ul>
           </div>
 
           <!-- Publik Relasi -->
-          <div class="division-card member-record" data-keywords="publik relasi humas umi alfina rofiqotul jannah holivatul hasanah 2421400106 2521400044 252140013">
-            <div class="div-title-row">
-              <span class="div-name">Divisi Publik Relasi</span>
-              <span class="div-badge">3 Personel</span>
+          <div class="deck-card member-record" data-keywords="publik relasi humas umi alfina rofiqotul jannah holivatul hasanah 2421400106 2521400044 252140013">
+            <div class="card-top">
+              <span class="dept-title">Divisi Publik Relasi</span>
+              <span class="dept-counter">3 Personel</span>
             </div>
-            <div class="co-row">
-              <div class="co-tag">Koordinator (CO)</div>
-              <div class="co-name">Umi Alfina <span class="nim-code">2421400106</span></div>
+            <div class="co-spotlight">
+              <div class="co-avatar">UA</div>
+              <div class="co-details">
+                <div class="co-label">Koordinator (CO)</div>
+                <div class="co-name">Umi Alfina</div>
+              </div>
+              <span class="nim-pill" onclick="copyNIM('2421400106')">2421400106</span>
             </div>
-            <div class="members-block">
-              <div class="members-heading">Anggota</div>
-              <ul class="member-list">
-                <li class="member-item">
-                  <span class="member-name">Rofiqotul Jannah</span>
-                  <span class="nim-code">2521400044</span>
-                </li>
-                <li class="member-item">
-                  <span class="member-name">Holivatul Hasanah</span>
-                  <span class="nim-code">2521400013</span>
-                </li>
-              </ul>
-            </div>
+            <div class="member-group-label">Anggota Divisi</div>
+            <ul class="member-roster">
+              <li class="roster-row">
+                <div class="member-side">
+                  <span class="mini-avatar">RJ</span>
+                  <span class="person-name">Rofiqotul Jannah</span>
+                </div>
+                <span class="nim-pill" onclick="copyNIM('2521400044')">2521400044</span>
+              </li>
+              <li class="roster-row">
+                <div class="member-side">
+                  <span class="mini-avatar">HH</span>
+                  <span class="person-name">Holivatul Hasanah</span>
+                </div>
+                <span class="nim-pill" onclick="copyNIM('2521400013')">2521400013</span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- FOOTNOTES -->
-    <div class="notes-box">
-      <strong>Catatan Khusus:</strong> Tanda bintang (*) pada nama anggota (Divisi Keilmuan Putra: Iqromul Muslimin dan Moh. Afif Amuy) merujuk pada catatan penugasan ganda / verifikasi data internal sesuai naskah dokumen asli.
+    <!-- FOOTER NOTES -->
+    <div class="info-footer-card">
+      <strong>Catatan Khusus:</strong> Tanda bintang (*) pada nama anggota (Divisi Keilmuan Putra: Iqromul Muslimin dan Moh. Afif Amuy) merupakan tanda penugasan ganda / verifikasi data khusus sesuai dokumen induk organisasi.
     </div>
 
-    <!-- FOOTER -->
     <footer>
-      Dokumen Resmi Struktur Kepengurusan Organisasi &bull; Edisi Merah Putih
+      &copy; Portal Direktori Kepengurusan Organisasi &bull; Edisi Merah Putih
     </footer>
   </div>
 
-  <script>
-    // THEME TOGGLE
-    const themeBtn = document.getElementById('themeBtn');
-    const themeLabel = document.getElementById('themeLabel');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const savedTheme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
+  <!-- TOAST NOTIFIKASI -->
+  <div id="toast" class="toast">NIM Tersalin ke Clipboard!</div>
 
-    function applyTheme(theme) {
-      if (theme === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        themeLabel.textContent = 'Mode Terang';
-      } else {
-        document.documentElement.removeAttribute('data-theme');
-        themeLabel.textContent = 'Mode Gelap';
-      }
-      localStorage.setItem('theme', theme);
+  <script>
+    // COPY NIM FEATURE
+    const toast = document.getElementById('toast');
+    function copyNIM(nim) {
+      navigator.clipboard.writeText(nim).then(() => {
+        toast.textContent = `NIM ${nim} Tersalin!`;
+        toast.classList.add('show');
+        setTimeout(() => {
+          toast.classList.remove('show');
+        }, 2200);
+      });
     }
 
-    applyTheme(savedTheme);
-
-    themeBtn.addEventListener('click', () => {
-      const current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
-      applyTheme(current === 'dark' ? 'light' : 'dark');
-    });
-
-    // FILTER TABS & SEARCH
-    const tabs = document.querySelectorAll('.tab-btn');
+    // TABS & LIVE SEARCH FILTER
+    const tabs = document.querySelectorAll('.tab-item');
     const searchInput = document.getElementById('searchInput');
     const records = document.querySelectorAll('.member-record');
     const groups = document.querySelectorAll('.section-group');
@@ -1095,7 +1371,6 @@
       const query = searchInput.value.toLowerCase().trim();
       let visibleCount = 0;
 
-      // Group level visibility
       groups.forEach(group => {
         const groupType = group.getAttribute('data-group');
         let showGroup = false;
@@ -1124,7 +1399,6 @@
         group.style.display = showGroup ? 'block' : 'none';
       });
 
-      // Individual search match
       records.forEach(rec => {
         const text = rec.getAttribute('data-keywords') || '';
         const matchesQuery = !query || text.includes(query);
